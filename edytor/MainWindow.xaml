@@ -1,0 +1,91 @@
+﻿<Window x:Class="edytor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" MaxHeight="450" MaxWidth="800" MinHeight="300" MinWidth="500">
+
+    <Window.InputBindings>
+        <KeyBinding Command="ApplicationCommands.SaveAs" Key="F2"/>
+        <KeyBinding Command="ApplicationCommands.Close" Key="F4"/>
+    </Window.InputBindings>
+    
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.New" Executed="New_Executed"/>
+        <CommandBinding Command="ApplicationCommands.Open" Executed="Open_Executed" />
+        <CommandBinding Command="ApplicationCommands.Save" Executed="Save_Executed" CanExecute="Save_CanExecute"/>
+        <CommandBinding Command="ApplicationCommands.SaveAs" Executed="SaveAs_Executed" CanExecute="SaveAs_CanExecute"/>
+        <CommandBinding Command="ApplicationCommands.Close" Executed="Exit_Executed"/>
+        <CommandBinding Command="ApplicationCommands.Help" Executed="Help_Executed"/>
+    </Window.CommandBindings>
+    
+    <DockPanel>
+        
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="New" Command="ApplicationCommands.New" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}"/>
+                <MenuItem Header="Open" Command="ApplicationCommands.Open" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}"/>
+                <MenuItem Header="Save" Command="ApplicationCommands.Save" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}"/>
+                <MenuItem Header="SaveAs" Command="ApplicationCommands.SaveAs" InputGestureText="F2" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}"/>
+                <Separator/>
+                <MenuItem Header="Exit" Command="ApplicationCommands.Close" InputGestureText="F4" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}"/>
+            </MenuItem>
+            <MenuItem Header="Edit">
+                <MenuItem Header="Undo" Command="ApplicationCommands.Undo" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}"/>
+                <MenuItem Header="Redo" Command="ApplicationCommands.Redo" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}"/>
+                <Separator/>
+                <MenuItem Header="Cut" Command="ApplicationCommands.Cut" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}"/>
+                <MenuItem Header="Copy" Command="ApplicationCommands.Copy" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}"/>
+                <MenuItem Header="Paste" Command="ApplicationCommands.Paste" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}"/>
+            </MenuItem>
+            <MenuItem Header="Help" Command="ApplicationCommands.Help"/>
+            <MenuItem Header="About" Click="About_Click" />
+        </Menu>
+        
+        <ToolBar DockPanel.Dock="Top">
+            <ToggleButton Command="ApplicationCommands.Undo" Name="btnUndo" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}" Click="btnUndo_Click">
+                <Image Source="C:/Users/Przemek/Documents/studia/2 semestr/.Net/lab4/icons8-undo-64.png" Width="20" Height="20" />
+            </ToggleButton>
+            <ToggleButton Command="ApplicationCommands.Redo" Name="btnRedo" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}" Click="btnRedo_Click">
+                <Image Source="C:/Users/Przemek/Documents/studia/2 semestr/.Net/lab4/icons8-redo-64.png" Width="20" Height="20" />
+            </ToggleButton>
+
+            <ToggleButton Command="ApplicationCommands.Close" Name="btnClose" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}">
+                <Image Source="C:/Users/Przemek/Documents/studia/2 semestr/.Net/lab4/icons8-close-64.png" Width="20" Height="20" />
+            </ToggleButton>
+            <ToggleButton Command="ApplicationCommands.New" Name="btnNew" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}">
+                <Image Source="C:/Users/Przemek/Documents/studia/2 semestr/.Net/lab4/icons8-add-file-64.png" Width="20" Height="20" />
+            </ToggleButton>
+            <ToggleButton Command="ApplicationCommands.Open" Name="btnOpen" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}">
+                <Image Source="C:/Users/Przemek/Documents/studia/2 semestr/.Net/lab4/icons8-opened-folder-64.png" Width="20" Height="25" />
+            </ToggleButton>
+            <ToggleButton Command="ApplicationCommands.Save" Name="btnSave" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}">
+                <Image Source="C:/Users/Przemek/Documents/studia/2 semestr/.Net/lab4/icons8-save-50.png" Width="20" Height="20" />
+            </ToggleButton>
+            <ToggleButton Command="ApplicationCommands.SaveAs" Name="btnSaveAs" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}">
+                <Image Source="C:/Users/Przemek/Documents/studia/2 semestr/.Net/lab4/icons8-save-as-64.png" Width="21" Height="21" />
+            </ToggleButton>
+
+            <ToggleButton Command="ApplicationCommands.Cut" Name="btnCut" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}" Click="btnCut_Click">
+                <Image Source="C:/Users/Przemek/Documents/studia/2 semestr/.Net/lab4/icons8-cut-64.png" Width="20" Height="20" />
+            </ToggleButton>
+            <ToggleButton Command="ApplicationCommands.Copy" Name="btnCopy" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}" Click="btnCopy_Click">
+                <Image Source="C:/Users/Przemek/Documents/studia/2 semestr/.Net/lab4/icons8-copy-64.png" Width="20" Height="20" />
+            </ToggleButton>
+            <ToggleButton Command="ApplicationCommands.Paste" Name="btnPaste" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}" Click="btnPaste_Click">
+                <Image Source="C:/Users/Przemek/Documents/studia/2 semestr/.Net/lab4/icons8-paste-64.png" Width="20" Height="20" />
+            </ToggleButton>
+
+            <ToggleButton Command="ApplicationCommands.Help" Name="btnHelp" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Command.Text}">
+                <Image Source="C:/Users/Przemek/Documents/studia/2 semestr/.Net/lab4/icons8-help-64.png" Width="20" Height="20" />
+            </ToggleButton>
+            <ToggleButton Name="btnAbout" Click="About_Click" ToolTip="O programie">
+                <Image Source="C:/Users/Przemek/Documents/studia/2 semestr/.Net/lab4/icons8-about-64.png" Width="20" Height="20" />
+            </ToggleButton>
+        </ToolBar>
+        
+        <RichTextBox Name="rtbEditor"  TextChanged="rtbEditor_TextChanged" Margin="15,5" BorderThickness="1"/>
+        
+    </DockPanel>
+</Window>
